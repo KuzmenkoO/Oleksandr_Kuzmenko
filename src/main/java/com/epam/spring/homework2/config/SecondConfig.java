@@ -1,29 +1,27 @@
 package com.epam.spring.homework2.config;
 
-import com.epam.spring.homework2.beans.BeanB;
-import com.epam.spring.homework2.beans.BeanC;
-import com.epam.spring.homework2.beans.BeanD;
-import com.epam.spring.homework2.beans.BeanF;
+import com.epam.spring.homework2.beans.*;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
 
 @Configuration
 @PropertySource("application.properties")
 @ComponentScan("com.epam.spring.homework2.beans")
 public class SecondConfig {
 
-    @Bean
+    @Bean(initMethod = "myInitMethod", destroyMethod = "myDestroyMethod")
     @DependsOn("beanD")
     public BeanB beanB() {
         return new BeanB();
     }
 
-    @Bean
+    @Bean(initMethod = "myInitMethod", destroyMethod = "myDestroyMethod")
     @DependsOn("beanB")
     public BeanC beanC() {
         return new BeanC();
     }
 
-    @Bean
+    @Bean(initMethod = "myInitMethod", destroyMethod = "myDestroyMethod")
     public BeanD beanD() {
         return new BeanD();
     }
@@ -32,5 +30,15 @@ public class SecondConfig {
     @Lazy
     public BeanF beanF() {
         return new BeanF();
+    }
+
+    @Bean
+    public MyBeanPostProcessor myBeanPostProcessor(){
+        return new MyBeanPostProcessor();
+    }
+
+    @Bean
+    public MyBeanFactoryPostProcessor myBeanFactoryPostProcessor(){
+        return new MyBeanFactoryPostProcessor();
     }
 }

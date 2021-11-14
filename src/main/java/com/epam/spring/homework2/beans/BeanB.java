@@ -10,6 +10,18 @@ public class BeanB implements Bean {
     @Value("${beanB.value}")
     private int value;
 
+    public void myInitMethod() {
+        System.out.println(getClass().getSimpleName() + " inside initMethod");
+    }
+
+    public void myOtherInitMethod() {
+        System.out.println(getClass().getSimpleName() + " inside myOtherInitMethod");
+    }
+
+    public void myDestroyMethod() {
+        System.out.println(getClass().getSimpleName() + " inside destroyMethod");
+    }
+
     @Override
     public String getName() {
         return name;
